@@ -41,65 +41,12 @@ int main(int argc, char const *argv[])
 {
 
     int array[MAX];
-    int array1[MAX];
-    int array2[MAX];
-    int array3[MAX];
-    int array4[MAX];
 
-    // ordenado
+    // crescente
     for (int i = 0; i < MAX; i++)
     {
         array[i] = i;
     }
-
-    //
-    int k = MAX / 2;
-    for (int i = 0; i < MAX; i++)
-    {
-        if (i < MAX / 2)
-        {
-            array1[i] = i;
-        }
-        else
-        {
-            array1[i] = k;
-            k--;
-        }
-    }
-
-    //decrescente
-    int j = MAX - 1;
-    for (int i = 0; i < MAX; i++)
-    {
-        array2[i] = j;
-        j--;
-    }
-
-    k = MAX / 2;
-    for (int i = 0; i < MAX; i++)
-    {
-        if (i > (MAX / 2) - 1)
-        {
-            array3[i] = k;
-            k++;
-        }
-        else
-        {
-            array3[i] = k;
-            k--;
-        }
-    }
-
-    //aleatorio
-    for (int i = 0; i < MAX; i++)
-    {
-        array4[i] = rand() % MAX;
-    }
-
-    // for (int i = 0; i < MAX; i++)
-    // {
-    //     printf("%d \n", array4[i]);
-    // }
 
     double start, stop, elapsed;
     start = (double)clock() / CLOCKS_PER_SEC;
@@ -107,35 +54,86 @@ int main(int argc, char const *argv[])
     stop = (double)clock() / CLOCKS_PER_SEC;
     elapsed = stop - start;
 
-    printf("Tempo de execucao 1: %lf\n", elapsed);
+    printf("Tempo de ordenacao crescente: %lf secs\n", elapsed);
+
+    ////////////////////////////////////////////////
+
+    //decrescente
+    int j = MAX - 1;
+    for (int i = 0; i < MAX; i++)
+    {
+        array[i] = j;
+        j--;
+    }
 
     start = (double)clock() / CLOCKS_PER_SEC;
-    quicksort(array2, 0, MAX);
+    quicksort(array, 0, MAX);
     stop = (double)clock() / CLOCKS_PER_SEC;
     elapsed = stop - start;
 
-    printf("Tempo de execucao 2: %lf\n", elapsed);
+    printf("Tempo de ordenacao decrescente: %lf secs\n", elapsed);
+
+    ////////////////////////////////////////////////
+    // crescente/decrescente
+    int k = MAX / 2;
+    for (int i = 0; i < MAX; i++)
+    {
+        if (i < MAX / 2)
+        {
+            array[i] = i;
+        }
+        else
+        {
+            array[i] = k;
+            k--;
+        }
+    }
 
     start = (double)clock() / CLOCKS_PER_SEC;
-    quicksort(array1, 0, MAX);
+    quicksort(array, 0, MAX);
     stop = (double)clock() / CLOCKS_PER_SEC;
     elapsed = stop - start;
 
-    printf("Tempo de execucao 3: %lf\n", elapsed);
+    printf("Tempo de ordenacao crescente/decrescente: %lf secs\n", elapsed);
+
+    /////////////////////////////////////////////////////////
+    // decrescente/crescente
+
+    k = MAX / 2;
+    for (int i = 0; i < MAX; i++)
+    {
+        if (i > (MAX / 2) - 1)
+        {
+            array[i] = k;
+            k++;
+        }
+        else
+        {
+            array[i] = k;
+            k--;
+        }
+    }
 
     start = (double)clock() / CLOCKS_PER_SEC;
-    quicksort(array3, 0, MAX);
+    quicksort(array, 0, MAX);
     stop = (double)clock() / CLOCKS_PER_SEC;
     elapsed = stop - start;
 
-    printf("Tempo de execucao 4: %lf\n", elapsed);
+    printf("Tempo de ordenacao decrescente/crescente: %lf secs\n", elapsed);
+    ////////////////////////////////////////////////
+
+    //aleatorio
+    for (int i = 0; i < MAX; i++)
+    {
+        array[i] = rand() % MAX;
+    }
 
     start = (double)clock() / CLOCKS_PER_SEC;
-    quicksort(array4, 0, MAX);
+    quicksort(array, 0, MAX);
     stop = (double)clock() / CLOCKS_PER_SEC;
     elapsed = stop - start;
 
-    printf("Tempo de execucao 5: %lf\n", elapsed);
+    printf("Tempo de ordenacao aleatorio: %lf secs\n", elapsed);
 
     return 0;
 }
