@@ -4,31 +4,36 @@
 
 #define MAX 100000
 
-int separa(int v[], int p, int r)
+void troca(int vetor[], int a, int b)
 {
-    int c = v[r];
-    int t, j = p;
-    for (int k = p; k < r; ++k)
-        if (v[k] <= c)
-        {
-            t = v[j];
-            v[j] = v[k];
-            v[k] = t;
-            ++j;
-        }
-    t = v[j];
-    v[j] = v[r];
-    v[r] = t;
-    return j;
+    int temp = vetor[a];
+    vetor[a] = vetor[b];
+    vetor[b] = temp;
 }
 
-void quicksort(int v[], int p, int r)
+int separa(int vetor[], int inicio, int fim)
 {
-    if (p < r)
+    int pivo = vetor[fim];
+    int divide = inicio;
+    for (int i = inicio; i < fim; i++)
     {
-        int j = separa(v, p, r);
-        quicksort(v, p, j - 1);
-        quicksort(v, j + 1, r);
+        if (vetor[i] <= pivo)
+        {
+            troca(vetor, divide, i);
+            divide++;
+        }
+    }
+    troca(vetor, divide, fim);
+    return divide;
+}
+
+void quicksort(int vetor[], int inicio, int fim)
+{
+    if (inicio < fim)
+    {
+        int pivo = separa(vetor, inicio, fim);
+        quicksort(vetor, inicio, pivo - 1);
+        quicksort(vetor, pivo + 1, fim);
     }
 }
 
